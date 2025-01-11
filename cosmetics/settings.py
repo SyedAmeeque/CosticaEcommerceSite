@@ -140,10 +140,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',  # Include a folder named 'static' at the project level
 ]
 
-# Media files (uploads)
-MEDIA_URL = '/media/'  # URL to use when referring to media files
-MEDIA_ROOT = BASE_DIR / 'media'  # Directory where uploaded media files are stored
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type
