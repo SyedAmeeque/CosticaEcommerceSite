@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+  {% block content %}
+  {% load static %}
+  {% load image_filter  %}
+  <section class="title-section bg-light">
+    <div class="container text-center">
+      <h1>Your Shopping Cart</h1>
+      <a href="{% url 'home' %}" class="mt-2 fs-12">Home</a><span class="fs-12"> . Your Shopping Cart</span>
+    </div>
+  </section>
+  
+
+  <section class="section mb-5">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-8 m-0">
+          {% if not cart_items and request.user.is_authenticated %}
+          <div class="alert alert-info" role="alert">
+              Your Cart is Empty!
+          </div>
+          {% elif not request.session.cart and not request.user.is_authenticated %}
+            <div class="alert alert-info" role="alert">
+                Your Cart is Empty!
+            </div>
+          {% else %}
+
+         
+
+            <div class="row ">
+                {% if request.user.is_authenticated %}
+                <div class="px-4 py-3 rounded bg-wheat">
+                  <h5 class="mb-0 fs-14 text-dark">Cart Items</h5>
+                </div>  
+                  {% for items in cart_items %}
+                    <div class="row border-bottom px-4 py-2 border w-100 mx-auto product-item mt-2 rounded">
+                      <div class="col-md-6">
+                        <div class="row ">
+                          <div class="col-4 my-auto">
+                              <form action="" method="post">
+                                {% csrf_token %}
+                                <input type="number" hidden name="delete_id" value="{{items.product.id}}">
+                                <button type="submit" class="btn2"><i class="fa-solid fa-trash-can text-danger fs-14"></i></button>
+                              </form>
+                              </div>
+                          <div class="col-8">
+                            
+                              <a href="{% url 'product' slug=items.product.slug %}">
+
+                                <img src="{{ items.product|filter_one_image }}" alt="" width="150px">
+                              </a>
+                              <p class="fs-6 my-auto mb-auto">
+                                {{items.product.title}}
+                              </p>
+                           
+                          </div>
+                        </div>
+                      </div>
+    
+                      <div class="col-md-2 my-auto mt-md-auto mt-2">
+                        <p class="mb-0 fs-14">Sale Price: ${{items.product.sale_price}}</p>
+                      </div>
+    
+                      <div class="col-md-2 my-auto mt-md-auto mt-2 ">
+                          <div class="border d-flex justify-content-between align-items-center w-100 rounded">
+                            <form action="" method="post">
+                              {% csrf_token %}
+                              <input type="number" value='{{items.product.id}}' hidden name="minus_id">
+                              <button type="submit" class=" p-2 bg-white">-</button>
+                            </form>
+                            <span class="p-2">{{items.quantity}}</span>
+                            <form action="" method="post">
+                              {% csrf_token %}
+                              <input type="number" value='{{items.product.id}}' hidden name="add_id">
+                              <button class="p-2 bg-white">+</button>
+                            </form>
+                          </div>
+                      </div>
+    
+                      
+                      <div class="col-md-2 my-auto mt-md-auto mt-2">
+                        <p class="mb-0 fs-14">Total Price: ${{items.total_price}}</p>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                <div class="px-4 py-3 rounded bg-wheat">
+                  <h5 class="mb-0 fs-14 text-dark">Cart Items</h5>
+                </div>  
+                {% for product, quantity, price in request.session.cart|get_cart_items_session %}
+                <div class="row border-bottom px-4 py-2 border w-100 mx-auto product-item mt-2 rounded">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-4 my-auto">
+                        <form action="" method="post">
+                          {% csrf_token %}
+                          <input type="number" hidden name="delete_id" value="{{product.id}}">
+                          <button type="submit" class="btn2"><i class="fa-solid fa-trash-can text-danger fs-14"></i></button>
+                        </form>
+                      </div>
+                      <div class="col-8">
+                        <a href="{% url 'product' slug=product.slug %}">
+                          <img src="{{product|filter_one_image}}" alt="" width="150px">
+                        </a>
+                        <p class="fs-6 my-auto mb-auto">
+                          {{product.title}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-2 my-auto mt-md-auto mt-2">
+                    <p class="mb-0 fs-14 ">Sale Price: ${{product.sale_price}}</p>
+                  </div>
+  
+                  <div class="col-md-2 my-auto mt-md-auto mt-2 ">
+                      <div class="d-flex justify-content-between border align-items-center w-100">
+                        <form action="" method="post">
+                          {% csrf_token %}
+                          <input type="number" value='{{product.id}}' hidden name="minus_id">
+                          <button type="submit" class="p-2 bg-white">-</button>
+                        </form>
+                        <span class="p-2">{{quantity}}</span>
+                        <form action="" method="post">
+                          {% csrf_token %}
+                          <input type="number" value='{{product.id}}' hidden name="add_id">
+                          <button class="p-2 bg-white">+</button>
+                        </form>
+                      </div>
+                  </div>
+  
+                  
+                  <div class="col-md-2 my-auto mt-md-auto mt-2">
+                    <p class="mb-0 ">Total Price: ${{price}}</p>
+                  </div>
+                </div>
+              
+              {% endfor %}
+
+              {% endif %}
+            </div>
+
+            
+          {% endif %}
+          
+          <div class="row w-100 mt-3 mx-auto">
+            <div class="w-50 p-0">
+              <a href="{% url "checkout" %}" class="">
+                <button class="btn3 w-100 py-3 fs-14" >Proceed to Checkout</button>
+              </a>
+            </div>
+              
+            <div class="w-50 pe-0">
+              <a href="{% url "shop" %}">
+                <button class="btn1 w-100">Continue Shopping</button>
+              </a>
+            </div>
+
+          </div>
+            
+       
+        
+        </div>
+
+        <div class="col-lg-4 mt-lg-0 mt-1">
+            <div class="px-4 py-3 rounded bg-wheat">
+              <p class="mb-0 fs-14">There are {% if request.user.is_authenticated %}{{cart_length}}{% else %}{{request.session.cart|get_cart_length}}{% endif %} items in your cart</p>
+            </div>
+            <div class="box border bg-white rounded mt-1">
+              <div class="d-flex justify-content-between pb-2 border-bottom">
+                {% if request.user.is_authenticated%}
+                  <span class="fs-6 ">Total:</span> <span class="fs-5">${{total_price}}</span>
+                {% else %}
+                <span class="fs-6 ">Total:</span> <span class="fs-5">${{ request.session.cart|get_total_price_session }}</span>
+                {% endif %}
+              </div>
+              <div class="d-flex justify-content-between mt-2 pb-2 border-bottom">
+                <span class="fs-6 ">Shipping:</span> <span class="fs-12 my-auto">Shipping & taxes calculated at checkout</span>
+              </div>
+
+              <div class="mt-4">
+                {% if request.user.is_authenticated %}
+                <p class="mb-0 fs-14 pb-2 border-bottom">Spend ${{remaining_price}} for Free Shipping</p>
+                {% else %}
+                <p class="mb-0 fs-14 pb-2 border-bottom">Spend ${{request.session.cart|get_remaining_price_cart }} for Free Shipping</p>
+                {% endif %}
+              </div>
+              <div class="mt-4">
+                <p class="mb-0 pb-2 fs-14">Free shipping for any orders above $900.00</p>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    
+    </div>
+  </section>
+
+
+
+
+
+
+  {% endblock %}

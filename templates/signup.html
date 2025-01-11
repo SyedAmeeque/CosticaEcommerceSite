@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+  {% block content %}
+  {% load static %}
+
+  <section class="section">
+    <div class="container text-center">
+      <h1 class="">Signup</h1>
+      <a href="{% url 'home' %}" class="mt-2 fs-12">Home</a><span class="fs-12"> . Signup</span>
+    </div>
+  </section>
+
+    <section class="bg-wheat section">
+      <div class="container">
+        {% if messages %}
+            <div>
+              
+              {% for msg in messages %}
+              <div class="alert alert-{{msg.tags}} mb-3" role="alert">
+               {{msg}}
+              </div>
+              {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="col-md-6 mx-auto">
+          <form method="post" class="p-4 rounded-1" style="border:1px solid #000;">
+            {% csrf_token %}
+            <h1 class="text-center">Create An Account</h1>
+               
+            
+        
+            <div class="input-sin">
+              <label for="" class="fs-14">Full-Name:</label>
+              <input type="text" class='mt-1' placeholder="Name" name="name">    
+            </div>
+
+            <div class="input-sin mt-2">
+              <label for="" class="fs-14">Phone Number:</label>
+              <input type="tel" class='mt-1' placeholder="312 456 789 00" name="phone">    
+            </div>
+
+            <div class="input-sin mt-2">
+              <label for="" class="fs-14">Email Address:</label>
+              <input type="email" class='mt-1' placeholder="example@gmail.com" name="email">    
+            </div>
+
+            <div class="input-sin mt-2">
+              <label for="" class="fs-14">Shipping Address:</label>
+              <input type="text" class='mt-1' placeholder="Street No.00 Town DC Washington, USA" name="address">    
+            </div>
+
+            <div class="input-sin mt-2">
+              <label for="" class="fs-14">Password:</label>
+              <input type="password" class='mt-1' placeholder="*****" name="password">    
+            </div>
+
+            <div class="input-sin mt-2">
+              <label for="" class="fs-14">Confirm Password:</label>
+              <input type="password" class='mt-1' placeholder="*****" name="confirm_password">    
+            </div>
+
+            <div class="mt-2">
+              <button type="submit" class="btn1 w-100">Submit</button>
+            </div>
+            <p class="mt-3 text-center">Already have an account? |<a href="{% url 'login' %}" class="fw-bold"> Login</a></p>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+
+
+{% endblock %}
+
+  

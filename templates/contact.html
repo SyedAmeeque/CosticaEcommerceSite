@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+  {% block content %}
+  {% load static %}
+
+  
+
+   <section class="section bg-light">
+    <div class="container text-center">
+      <h1>Contact Us</h1>
+      <a href="{% url 'home' %}" class="mt-2 fs-12">Home</a><span class="fs-12"> . Contact</span>
+    </div>
+  </section>
+
+    <section class="section">
+      <div class="container-fluid">
+        {% if messages %}
+        <div>
+          
+          {% for msg in messages %}
+          <div class="alert alert-{{msg.tags}} mb-3" role="alert">
+           {{msg}}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="row">
+          <div class="col-md-8">
+          
+              <form method="post" class="p-4 rounded-1" style="border:1px solid #000;">
+                {% csrf_token %}
+                <h1 class="">Let us know how we can help you!</h1>
+                   
+            
+            
+                <div class="input-sin">
+                  <label for="" class="fs-14">Full-Name:</label>
+                  <input type="text" class='mt-1' placeholder="Name" name="name">    
+                </div>
+    
+                <div class="input-sin mt-2">
+                  <label for="" class="fs-14">Phone Number:</label>
+                  <input type="tel" class='mt-1' placeholder="312 456 789 00" name="phone">    
+                </div>
+    
+                <div class="input-sin mt-2">
+                  <label for="" class="fs-14">Email Address:</label>
+                  <input type="email" class='mt-1' placeholder="example@gmail.com" name="email">    
+                </div>
+    
+                <div class="input-sin mt-2">
+                  <label for="" class="fs-14">Message:</label>
+                  <textarea cols="30" rows="5" class='mt-1' placeholder="hello My name is....." name="message"></textarea>
+                </div>
+               
+    
+                <div class="mt-2">
+                  <button type="submit" class="btn1 w-100">Submit</button>
+                </div>
+               
+              </form>
+           
+          </div>
+
+          <div class="col-md-4 mt-md-auto mt-3 my-auto  px-4">
+            <h5>Address : </h5> 
+            <p class="mb-0">927 S. Goldwyn Ave # 124 Orlando, Fl 34787 USA</p>
+
+            <h5 class="mt-5">Email Us : </h5> 
+            <p class="mb-0">info@gmail.com</p>
+
+            <h5 class="mt-5">Phone Number : </h5> 
+            <p class="mb-0">+92 354474788</p>
+            <div class="mt-5">
+              <div class="d-flex">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+
+
+
+
+{% endblock %}
+
+  

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+  {% block content %}
+  {% load static %}
+ 
+  <section class="section bg-light">
+    <div class="container text-center">
+      <h1>About Us</h1>
+      <a href="{% url 'home' %}" class="mt-2 fs-12">Home</a><span class="fs-12"> . About</span>
+    </div>
+  </section> 
+
+    <section class="section">
+      <div class="container">
+          <div class="mt-3">
+            <h1 class="text-center fw-light mx-auto">We're Radiant Beauty!<br>  
+              We’re redefining the world of skincare and cosmetics, empowering you to embrace your natural glow with high-quality, innovative products that let your beauty shine through.</h1>
+              <img src="{% static "images/ab-1.jpg" %}" alt="" width="100%" class="img-fluid mt-5" style="border-radius:15px;">
+            <div class="mt-3 border-bottom">
+              <p class="mt-5 text-center">
+                I’ve always been passionate about self-expression, but growing up, I struggled to find cosmetics that were both beautiful and clean. As I got older, the beauty industry still hadn’t evolved in the way I hoped, so I created Radiant Beauty – a line of innovative, feel-good essentials made with ingredients you can trust, designed to let your natural beauty shine without compromise.
+              </p>
+              
+            </div>
+          </div>
+        
+          <div class="about-sec mt-5 bg-light">
+            <div class="row">
+              <div class="col-md-3">
+                <img src="{% static "images/ab-1.png" %}" alt="" width="100%" class="img-fluid" >
+              </div>
+              <div class="col-md-9 my-auto mt-md-auto mt-3">
+                <div class="d-flex align-items-start ">
+                  <img src="{% static "images/ab-3.PNG" %}" alt="" width="50px">
+                  <div class="mx-3">
+                    <h5 class="fw-light ">
+                      Best purchase I’ve made this winter! The color and knitting are exquisite and it's so comfy! Went from NYC to Miami without ever taking it off. Super cute!!
+                    </h5>
+                    <p class="fs-14 mb-0">
+                      Kwang Shang. - CEO Vinovathemes
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mt-2">
+            <div class="col-md-6 my-auto mt-md-auto mt-3 order-md-1 order-2">
+              <h4>Why choose us ?</h4>
+              <p class="fw-light mt-2">
+                Maecenas congue metus id turpis iaculis mattis. Sed pellentesque id arcu id scelerisque. Ut ullamcorper rutrum justo, at blandit eros maximus ut. Integer non tincidunt justo, rhoncus Aenean venenatis sed purus ac sollicitudin. Nulla mauris risus, commodo et luctus rutrum, lobortis sed mauris. Integer congue, sem elementum varius tristique.
+              </p>
+            </div>
+            <div class="col-md-6 order-md-2 order-1">
+              <img src="{% static "images/ab-4.gif" %}" alt="" width="100%" class="img-fluid" >
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <img src="{% static "images/ab-5.gif" %}" alt="" width="100%" class="img-fluid" >
+            </div>
+
+            <div class="col-md-6 my-auto mt-md-auto mt-3">
+              <h4>Trusted online shopping</h4>
+              <p class="fw-light mt-2">
+                Maecenas congue metus id turpis iaculis mattis. Sed pellentesque id arcu id scelerisque. Ut ullamcorper rutrum justo, at blandit eros maximus ut. Integer non tincidunt justo, rhoncus Aenean venenatis sed purus ac sollicitudin. Nulla mauris risus, commodo et luctus rutrum, lobortis sed mauris. Integer congue, sem elementum varius tristique.
+              </p>
+            </div>
+           
+          </div>
+    
+      </div>
+    </section>
+
+
+
+
+{% endblock %}
+
+  

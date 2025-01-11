@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+  {% block content %}
+  {% load static %}
+  {% load image_filter  %}
+  <section class="title-section bg-light">
+    <div class="container text-center">
+      <h1>Orders</h1>
+      <a href="{% url 'home' %}" class="mt-2 fs-12">Home</a><span class="fs-12"> . Your Orders</span>
+    </div>
+  </section>
+
+  <section class="section mb-5">
+    <div class="container">
+
+    
+
+       
+        
+
+            <div class="product-item row px-4 py-2 border w-100 mx-auto">
+                {% if request.user.is_authenticated %}
+                  {% for item in orders %}
+                    <div class="row py-3 border-bottom">
+                      <div class="col-md-2 my-auto">
+                        <p class="mb-0 fs-6 text-md-center text-start"><span class="fw-bold">Order-Id : </span>{{item.order_details.order_id}}</p>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="row mt-lg-0 mt-2">
+                          <div class="col-4 my-auto">
+                            <a href="{% url 'product' slug=item.product.slug %}">
+  
+                              <img src="{{ item.product|filter_one_image }}" alt="" width="80px" class="object-fit-cover">
+                            </a>
+                           
+                          </div>
+                          <div class="col-8 my-auto fs-md-14">
+                              <h6 class="fs-md-14">{{item.product.title}}</h6>
+                              <p class="mt-sm-1 mt-0 mb-0">
+                                quantity: {{item.quantity}}
+                              </p>
+                              <p class="mt-sm-1 mt-0 mb-0">
+                                Remaining Stock: {{item.product.stock}}
+                              </p>
+                              <p class="mt-sm-1 mt-0 mb-0">
+                                Price : {{item.product.sale_price}}
+                              </p>
+                          </div>
+                        </div>
+                      </div>
+    
+                      <div class="col-md-2 my-auto fs-md-14 mt-2">
+                        <p class="mb-0">Shipping Address: </p>
+                        <p class="mb-0 fs-md-12">{{item.order_details.shipping_address}}</p>
+                      </div>
+    
+                      <div class="col-md-2 my-auto mt-lg-0 mt-2 fs-md-14">
+                        {% if order.order_details.order_status %}
+                        <span id="checkbox_selected_length" class="bg-success rounded p-1 text-white">
+                          Delivered
+                        </span>
+                        {% else %}
+                        <span id="checkbox_selected_length" class="bg-warning rounded p-1 text-dark">
+                          Pending
+                        </span>
+                          {% endif %}
+                      </div>
+    
+                      
+                      <div class="col-md-2 my-auto mt-lg-0 mt-2 fs-md-14">
+                        <p class="mb-0 ">Total: ${{item.total_price}}</p>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  <div class="alert alert-primary" role="alert">
+                    {{error}}
+                  </div>    
+                {% endif %}
+
+            </div>
+            
+          </div>
+        <div class="container">
+          <div class="row w-100 mt-3 ">
+            <div class="w-50 p-0">
+              <a href="{% url "home" %}" class="">
+                <button class="btn3 w-100 py-3 fs-14 " >Back To Home</button>
+              </a>
+            </div>
+              
+            <div class="w-50 pe-0">
+              <a href="{% url "shop" %}">
+                <button class="btn1 w-100 ">Continue Shopping</button>
+              </a>
+            </div>
+
+          </div>
+        </div>
+            
+          </div>
+
+  
+
+    
+    
+    </div>
+  </section>
+
+
+
+
+
+
+  {% endblock %}
