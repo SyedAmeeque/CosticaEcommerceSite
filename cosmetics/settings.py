@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -140,8 +140,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',  # Include a folder named 'static' at the project level
 ]
 
-MEDIA_URL = '/media/'  # URL where media files will be accessible
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directory to store media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type
