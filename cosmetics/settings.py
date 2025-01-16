@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['costicaecommercesite-production.up.railway.app', 'www.costicaecommercesite-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://costicaecommercesite-production.up.railway.app']
 
 # Application definition
 
@@ -70,6 +72,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cosmetics.wsgi.application'
+
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
 
 # Database
