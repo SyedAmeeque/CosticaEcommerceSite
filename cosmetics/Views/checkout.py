@@ -49,9 +49,12 @@ class Checkout(View):
         make_ids_list = ids_list.split(',')
         make_ids_int_list = [] 
 
-        
-        for id in make_ids_list:
-            make_ids_int_list.append(int(id))
+        if ids_list:
+            for id in make_ids_list:
+                make_ids_int_list.append(int(id))
+        else:
+            messages.error(request, "Please select the products you want to checkout!")
+            return redirect('checkout')
         
         print("make_ids_int_list:", make_ids_int_list)
         
