@@ -901,7 +901,7 @@ button{
         left: 3%;
     }
     .cart,.menu{
-        width:70%;
+        width:90%;
     }
     .quick_view_image{
         width:300px;
@@ -909,6 +909,6 @@ button{
 }
 @media screen and (max-width: 320px){
     .cart,.menu{
-        width:90%;
+        width:95%;
     }
 }
